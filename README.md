@@ -1,7 +1,7 @@
-# TryHackMe Writeups 🧠🔐
+# My TryHackMe Writeups
 
 Welcome to my collection of ethical hacking and cybersecurity lab notes from TryHackMe.  
-These writeups are focused on **learning, methodology, and ethical hacking techniques**.
+These write-ups are focused on **learning, methodology, and ethical hacking techniques**.
 
 ## 🧩 Rooms Covered
 
