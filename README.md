@@ -1,6 +1,6 @@
-# Active Reconnaissance (TryHackMe)
+# Passive Reconnaissance (TryHackMe)
 
-🔗 Room Name: Active Reconnaissance  
+🔗 Room Link: [Passive Reconnaissance](https://tryhackme.com/room/passiverecon)  
 🧠 Difficulty: Easy  
 📁 Category: Information Gathering
 
@@ -8,72 +8,83 @@
 
 ## 📝 Overview
 
-This room focuses on **active reconnaissance**, where interaction with the target system occurs to gather more detailed information. Unlike passive recon, this involves sending packets or making requests directly to the target.
+This room introduces **passive reconnaissance** techniques—methods of gathering information without directly interacting with the target. It covers tools and services that help gather public information using Open Source Intelligence (OSINT).
 
 ---
 
-## 🛠️ Tools Used
+## 🛠️ Tools & Resources Used
 
-- Web Browser
-- `ping`
-- `traceroute`
-- `telnet`
-- `netcat (nc)`
+- Google Search Operators
+- WHOIS Lookup
+- NSLookup / Dig
+- Shodan
+- Certificate Transparency Logs (crt.sh)
+- Wayback Machine (archive.org)
+- Hunter.io
+- Social media and blog searches
 
 ---
 
 ## 🧪 Learning Objectives
 
-- Understand the difference between passive and active recon
-- Use basic network utilities to interact with and gather information from a target
-- Recognize how network topology and services can be discovered through direct interaction
+- Understand the difference between active and passive recon
+- Discover domains, subdomains, and services using OSINT
+- Explore email harvesting and DNS record gathering
+- Learn about online footprint tracing
 
 ---
 
 ## 🔍 Key Techniques Practiced
 
-### ✅ Ping
+### ✅ WHOIS Lookup
 
-Used to check if a host is online and to measure latency:
-
-```bash
-ping target-ip
-```
-
-### ✅ Traceroute
-
-Mapped the path packets take to a destination:
+Used to identify domain ownership and registration data:
 
 ```bash
-traceroute target-ip
+whois example.com
 ```
 
-### ✅ Telnet
+### ✅ DNS Record Discovery
 
-Used to test open ports and banner grab services:
+Queried A, MX, TXT, and NS records:
 
 ```bash
-telnet target-ip 80
+nslookup -type=mx example.com
 ```
 
-### ✅ Netcat
-
-Utilized for port scanning and manual communication:
+or
 
 ```bash
-nc -v target-ip 80
+dig example.com ANY
 ```
+
+### ✅ Shodan
+
+Found open services exposed on the internet:
+
+- Search: `org:"CompanyName"` or `ip:targetIP`
+
+### ✅ Certificate Search
+
+Found subdomains using:
+
+- [crt.sh](https://crt.sh)
+- [Censys](https://censys.io)
+
+### ✅ Wayback Machine
+
+Used to discover archived pages of a target website and exposed endpoints or technologies.
 
 ---
 
 ## 🎯 Key Takeaways
 
-- Active reconnaissance provides more detailed, real-time information but is detectable.
-- Basic tools like `ping`, `traceroute`, and `telnet` are powerful for initial assessments.
-- Understanding service banners and response behavior is essential for later phases like exploitation.
+- Passive reconnaissance is legal and stealthy, useful for the first phase of a penetration test.
+- Publicly available information can often reveal sensitive data, such as subdomains, email addresses, and even software versions.
+- Tools like Shodan and crt.sh are powerful for mapping an organization’s external footprint.
 
 ---
 
 ## ⚠️ Ethical Notice
 
-This writeup is for educational purposes only. It respects the rules of TryHackMe and does not reveal solutions or flags.
+This writeup is for educational purposes only. No flags or answers are revealed in compliance with TryHackMe’s [Terms of Use](https://tryhackme.com/terms).
